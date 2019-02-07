@@ -24,5 +24,9 @@
 
 #paddle2{
   transform: scaleX(-1);
-  left: 10vw;
+  left: 2vw;
+}
+
+#paddle1{
+  left: 96vw;
 }

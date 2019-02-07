@@ -13,7 +13,12 @@ var ball = {
   yvel: 0.005,
 }
 
-
+var player1 = {
+  ypos: 0,
+}
+var player2 = {
+  ypos: 0,
+}
 
 var keyPresses = {
   w: false,
@@ -37,13 +42,21 @@ app.get('/api/getResponse', (req, res) => {
 var count = 0;
 
 app.get('/api/getCount', (req, res) => {
-  console.log('Got request with ');
-  console.log(req.body);
+  //console.log('Got request with ');
+  //console.log(req.body);
   res.send({
     ball: ball,
-    //player1: player1,
-    //player2: player2,
+    player1: player1,
+    player2: player2,
   });
+});
+
+app.post('/api/SetStates', (req, res) => {
+  console.log(req.body);
+
+  keyPresses = req.body;
+  res.send({state: 'good'});
+
 });
 
 
@@ -71,17 +84,43 @@ function gameTick(){
     ball.xpos = 1;
     ball.xvel = -ball.xvel + (Math.random() / 10);
   }
+  else if(ball.xpos < 0){
+    ball.xpos = 0;
+    ball.xvel = -ball.xvel;
+  }
   if(ball.ypos > 1){
     ball.ypos = 1;
     ball.yvel = -ball.yvel + (Math.random() / 10 );
   }
-  if(ball.xpos < 0){
-    ball.xpos = 0;
-    ball.xvel = -ball.xvel;
-  }
-  if(ball.ypos < 0){
+  else if(ball.ypos < 0){
     ball.ypos = 0;
     ball.yvel = -ball.yvel;
+  }
+
+  if(keyPresses.w){
+    player1.ypos -= 0.01;
+  }
+  else if(keyPresses.s){
+    player1.ypos += 0.01;
+  }
+
+  if(keyPresses.up){
+    player2.ypos -= 0.01;
+  }
+  else if(keyPresses.down){
+    player2.ypos += 0.01;
+  }
+  if(player1.ypos > 1){
+    player1.ypos = 1;
+  }
+  else if(player1.ypos < 0){
+    player1.ypos = 0;
+  }
+  if(player2.ypos > 1){
+    player2.ypos = 1;
+  }
+  else if(player2.ypos < 0){
+    player2.ypos = 0;
   }
 
 
