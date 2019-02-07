@@ -3,6 +3,8 @@ import './game.css';
 
 var App;
 var ball;
+var player1;
+var player2;
 
 class Game extends Component{
 
@@ -24,12 +26,14 @@ class Game extends Component{
     document.addEventListener("keydown", this.keyDownFunction, false);
     document.addEventListener("keyup", this.keyUpFunction, false);
     ball = document.getElementById('ball');
+    player1 = document.getElementById('paddle1');
+    player2 = document.getElementById('paddle2');
     this.testServer();
   }
 
   async testServer(){
     while(true){
-
+      await sleep(10);
       const response = await fetch('/api/getCount', {
         headers: {
           'Content-Type': 'application/json',
@@ -50,18 +54,24 @@ class Game extends Component{
   }
 
   setPosition(body){
-    var x = body.ball.xpos * (window.innerWidth - 200) + "px";
-    var y = body.ball.ypos * (window.innerHeight - 200)+ "px";
+    var x = body.ball.xpos * (window.innerWidth * 0.98) + "px";
+    var y = body.ball.ypos * (window.innerHeight * 0.965)+ "px";
     ball.style.left = x;
     ball.style.top = y;
 
+    //y = body.player1.ypos * (window.innerHeight* 0.9) + "px";
+    player1.style.top = y
+    //x = body.player2.ypos * (window.innerHeight* 0.9) + "px";
+    player2.style.top = y
   }
 
   render(){
     return(
       <div className = 'App'>
         <header className = 'App-header' onKeyPress={this.handleKey}>
-          <img src="https://www.pngarts.com/files/1/Meatball-PNG-Image-With-Transparent-Background.png" id='ball'/>
+          <a id='ball'/>
+          <a id='paddle1' className = 'paddle'/>
+          <a id='paddle2' className = 'paddle'/>
           <p>Game page</p>
         </header>
       </div>

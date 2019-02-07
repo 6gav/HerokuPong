@@ -15,6 +15,13 @@ var ball = {
 
 
 
+var keyPresses = {
+  w: false,
+  s: false,
+  up: false,
+  down: false,
+}
+
 
 game();
 
@@ -32,7 +39,11 @@ var count = 0;
 app.get('/api/getCount', (req, res) => {
   console.log('Got request with ');
   console.log(req.body);
-  res.send({ball: ball});
+  res.send({
+    ball: ball,
+    //player1: player1,
+    //player2: player2,
+  });
 });
 
 
@@ -58,11 +69,11 @@ function gameTick(){
   ball.ypos += ball.yvel;
   if(ball.xpos > 1){
     ball.xpos = 1;
-    ball.xvel = -ball.xvel + (Math.random() / 100);
+    ball.xvel = -ball.xvel + (Math.random() / 10);
   }
   if(ball.ypos > 1){
     ball.ypos = 1;
-    ball.yvel = -ball.yvel + (Math.random() / 100);
+    ball.yvel = -ball.yvel + (Math.random() / 10 );
   }
   if(ball.xpos < 0){
     ball.xpos = 0;
@@ -72,5 +83,7 @@ function gameTick(){
     ball.ypos = 0;
     ball.yvel = -ball.yvel;
   }
+
+
   setTimeout(gameTick, 10);
 }

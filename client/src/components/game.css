@@ -2,6 +2,27 @@
   position: absolute;
   top: 45vh;
   left: 50vw;
-  height: 200px;
-  width: 200px;
+  height: calc(1.5vh + 1vw);
+  width: calc(1.5vh + 1vw);
+  background-image: url('../img/ball.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: 0;
+}
+
+.paddle{
+  position: absolute;
+  height: 13vh;
+  width: 2vw;
+
+  background-image: url('../img/paddle.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: 0;
+
+}
+
+#paddle2{
+  transform: scaleX(-1);
+  left: 10vw;
 }
