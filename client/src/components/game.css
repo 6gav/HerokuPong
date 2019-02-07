@@ -1,0 +1,7 @@
+#ball{
+  position: absolute;
+  top: 45vh;
+  left: 50vw;
+  height: 200px;
+  width: 200px;
+}
